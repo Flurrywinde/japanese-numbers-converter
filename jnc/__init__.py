@@ -98,7 +98,7 @@ def parse(s: str, index: int = 0) -> int:
 	raise ParseError(f"{unit_str} appears more than once in subsequence {s}")
 
 
-def ja_to_arabic(s: str, enable_validation: bool = True, accept_daiji: bool = True, ignore_non_numerals: bool = True) -> int:
+def ja_to_arabic(s: str, enable_validation: bool = True, accept_daiji: bool = True, ignore_non_numerals: bool = False) -> int:
 	"""convert japanese number to arabic number
 
 	Args:
