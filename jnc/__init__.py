@@ -136,7 +136,7 @@ def ja_to_arabic(s: str, enable_validation: bool = True, accept_daiji: bool = Tr
 		if full_width_output:
 			return parse(s)
 		else:
-			return single2double(parse(s))
+			return single2double(str(parse(s)))
 	else:
 		# Ignore non-numerals mode
 		ret = ""
