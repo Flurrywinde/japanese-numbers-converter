@@ -57,6 +57,9 @@ JAPANESE_DIGIT_CHARS = "".join(JAPANESE_DIGITS)
 SUPPORTED_CHARS = UNIT_CHARS + JAPANESE_DIGIT_CHARS
 SUPPORTED_REGEX = re.compile(rf"^[{SUPPORTED_CHARS}]+$")
 
+def single2double(s):
+	trans = str.maketrans('0123456789', '０１２３４５６７８９')
+	return s.translate(trans)
 
 def validate(s: str) -> None:
 	if s == "":
@@ -98,7 +101,7 @@ def parse(s: str, index: int = 0) -> int:
 	raise ParseError(f"{unit_str} appears more than once in subsequence {s}")
 
 
-def ja_to_arabic(s: str, enable_validation: bool = True, accept_daiji: bool = True, ignore_non_numerals: bool = False) -> int:
+def ja_to_arabic(s: str, enable_validation: bool = True, accept_daiji: bool = True, ignore_non_numerals: bool = False, full_width_output: bool = False) -> int:
 	"""convert japanese number to arabic number
 
 	Args:
@@ -130,7 +133,10 @@ def ja_to_arabic(s: str, enable_validation: bool = True, accept_daiji: bool = Tr
 		# Original mode: raises an error if input contains unsupported characters
 		if not SUPPORTED_REGEX.match(s):
 			raise NotSupportedError(f"{s} contains unsupported characters. Supported format: {SUPPORTED_REGEX.pattern}")
-		return parse(s)
+		if full_width_output:
+			return parse(s)
+		else:
+			return single2double(parse(s))
 	else:
 		# Ignore non-numerals mode
 		ret = ""
@@ -144,4 +150,6 @@ def ja_to_arabic(s: str, enable_validation: bool = True, accept_daiji: bool = Tr
 					ret += str(parse(jnum))
 				jnum = ""
 				ret += char
+		if full_width_output:
+			ret = single2double(ret)
 		return ret

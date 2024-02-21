@@ -1,12 +1,14 @@
 # japanese-number-converter
 
-Converts [Japanese Numerals](https://en.wikipedia.org/wiki/Japanese_numerals) into arabic numbers. Based on
-[japanese-number-converter](https://github.com/kitagawa-hr/japanese-numbers-converter) which is based on
-[japanese-numerals-to-number](https://github.com/twada/japanese-numerals-to-number).
+Converts [Japanese kanji numerals](https://en.wikipedia.org/wiki/Japanese_numerals) into full-width numerals and arabic numbers.
+
+Based on
+[kitagawa-hr/japanese-number-converter](https://github.com/kitagawa-hr/japanese-numbers-converter) which is based on
+[twada/japanese-numerals-to-number](https://github.com/twada/japanese-numerals-to-number).
 
 ## Usage
 
-### Original code by kitagawa-hr
+### Original Usage
 
 ```py
 import jnc
@@ -16,10 +18,15 @@ assert jnc.ja_to_arabic("九千七兆千九百九十二億五千四百七十四�
 
 For detail, see [test cases](./test_jnc.py).
 
-### My modification
+### My modifications
 #### Ignore non-numerals mode
 ```py
-assert jnc.ja_to_arabic("亜県水戸郡余市東町十二線四号", ignore_non_numerals=True) == 亜県水戸郡余市東町12線4号
+assert jnc.ja_to_arabic("亜県水戸郡余市東町十二線四号", ignore_non_numerals=True) == "亜県水戸郡余市東町12線4号"
+```
+
+#### Output full-width numerals
+```py
+assert jnc.ja_to_arabic("亜県水戸郡余市東町十二線四号", ignore_non_numerals=True, full_width_output=True) == "亜県水戸郡余市東町１２線４号"
 ```
 
 ## Installation
