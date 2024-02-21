@@ -1,14 +1,12 @@
 # japanese-number-converter
 
-Converts [Japanese Numerals](https://en.wikipedia.org/wiki/Japanese_numerals) into `arabic number`.
-
-## Installation
-
-```sh
-pip install japanese-number-converter
-```
+Converts [Japanese Numerals](https://en.wikipedia.org/wiki/Japanese_numerals) into arabic numbers. Based on
+[japanese-number-converter](https://github.com/kitagawa-hr/japanese-numbers-converter) which is based on
+[japanese-numerals-to-number](https://github.com/twada/japanese-numerals-to-number).
 
 ## Usage
+
+### Original code by kitagawa-hr
 
 ```py
 import jnc
@@ -17,6 +15,18 @@ assert jnc.ja_to_arabic("九千七兆千九百九十二億五千四百七十四�
 ```
 
 For detail, see [test cases](./test_jnc.py).
+
+### My modification
+#### Ignore non-numerals mode
+```py
+assert jnc.ja_to_arabic("亜県水戸郡余市東町十二線四号", ignore_non_numerals=True) == 亜県水戸郡余市東町12線4号
+```
+
+## Installation
+
+```sh
+pip install "git+https://github.com/Flurrywinde/japanese-numbers-converter.git"
+```
 
 ## Supported formats
 
@@ -31,7 +41,3 @@ For detail, see [test cases](./test_jnc.py).
 ### [formal numerals (daiji) used in legal documents](https://en.wikipedia.org/wiki/Japanese_numerals#Formal_numbers)
 
 - `壱`, `弐`, `参`, `拾`
-
-## Reference
-
-I used [japanese-numerals-to-number](https://github.com/twada/japanese-numerals-to-number) as a reference.
