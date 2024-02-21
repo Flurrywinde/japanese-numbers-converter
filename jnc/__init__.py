@@ -101,13 +101,15 @@ def parse(s: str, index: int = 0) -> int:
 	raise ParseError(f"{unit_str} appears more than once in subsequence {s}")
 
 
-def ja_to_arabic(s: str, enable_validation: bool = True, accept_daiji: bool = True, ignore_non_numerals: bool = False, full_width_output: bool = False) -> int:
+def ja_to_arabic(s: str, enable_validation: bool = True, accept_daiji: bool = True, ignore_non_numerals: bool = False, full_width_output: bool = False):
 	"""convert japanese number to arabic number
 
 	Args:
 		s (str): number in japanese format
 		enable_validation (bool, optional): Whether to enable validation or not. Defaults to True.
 		accept_daiji (bool, optional): Whether to accept daiji or not. Defaults to True.
+		ignore_non_numerals (bool, optional): Passes non-numerals through to output. Defaults to False (raises an error if there are any unsupported characters).
+		full_width_output (bool, optional): Outputs numbers as full-width characters (even if the number was in the original string, i.e. wasn't converted by this function). Defaults to False.
 
 	Raises:
 		TypeError: raises if s is not str.
@@ -116,7 +118,10 @@ def ja_to_arabic(s: str, enable_validation: bool = True, accept_daiji: bool = Tr
 		ParseError: raises if s is not parsable. (e.g.)``十十, 〇十, 四万三億``
 
 	Returns:
-		int: arabic number
+		if ignore_non_numerals is False and full_width_output is also False:
+			int: arabic number
+		else:
+			str: s with Japanese numbers converted to arabic numerals
 	"""
 	if not isinstance(s, str):
 		raise TypeError(f"{s} is not string")

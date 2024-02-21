@@ -29,6 +29,9 @@ assert jnc.ja_to_arabic("亜県水戸郡余市東町十二線四号", ignore_non
 assert jnc.ja_to_arabic("亜県水戸郡余市東町十二線四号", ignore_non_numerals=True, full_width_output=True) == "亜県水戸郡余市東町１２線４号"
 ```
 
+##### Note
+Output in the original usage is of type `int`, but with my modifications, it's `str`.
+
 ## Installation
 
 ```sh
