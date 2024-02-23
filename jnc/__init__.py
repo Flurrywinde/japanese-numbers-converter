@@ -155,6 +155,8 @@ def ja_to_arabic(s: str, enable_validation: bool = True, accept_daiji: bool = Tr
 					ret += str(parse(jnum))
 				jnum = ""
 				ret += char
+		if jnum:
+			ret += str(parse(jnum))
 		if full_width_output:
 			ret = single2double(ret)
 		return ret
